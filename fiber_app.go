@@ -5,14 +5,14 @@ import (
 	"net/http"
 
 	"github.com/gofiber/fiber/v2"
-	"github.com/sirupsen/logrus"
+	"github.com/kataras/golog"
 )
 
 const profileUnknown = "unknown"
 
 func main() {
 	webApp := fiber.New()
-	webApp.Get("/profiles", func(c *fiber.Ctx) error {
+	webApp.Get("/Users/dbelyashov/golang/myProject/profiles", func(c *fiber.Ctx) error {
 		profileID := c.Query("profile_id", profileUnknown)
 		if profileID == "" {
 			profileID = profileUnknown
@@ -25,5 +25,5 @@ func main() {
 		return c.SendString(fmt.Sprintf("User Profile ID: %s", profileID))
 	})
 
-	logrus.Fatal(webApp.Listen(":80"))
+	golog.Fatal(webApp.Listen(":80"))
 }
